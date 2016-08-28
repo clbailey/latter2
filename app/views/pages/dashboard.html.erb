@@ -1,0 +1,40 @@
+<div class="row">
+  <!-- settings and connections -->
+	<div class="col-md-2 text-center">
+	  <%= image_tag 'logo.jpg', class: 'logo' %>
+    <hr>
+    <div class="time-zone">
+      <p class="text-center">
+			  <b><%= Time.zone.name %> Timezone </b>
+				<%= link_to 'change', edit_user_registration_path %>
+			</p>
+		</div>
+    <div class="social">
+      <% unless current_user.connections.where(provider: 'twitter').any? %>
+				<%= link_to 'Connect Twitter', 'auth/twitter', class: 'btn btn-info btn-block btn-sm' %>
+			<% else %>
+				<%= link_to 'Connect Twitter', 'auth/twitter', class: 'btn btn-info btn-block btn-sm', disabled: true %>
+				<%= link_to 'Delete Connection', connection_path(current_user.connections.where(provider: 'twitter').first), method: :delete %>
+			<% end %>
+
+      <% unless current_user.connections.where(provider: 'facebook').any? %>
+				<%= link_to 'Connect Facebook', 'auth/facebook', class: 'btn btn-primary btn-block btn-sm' %>
+			<% else %>
+				<%= link_to 'Connect Facebook', 'auth/facebook', class: 'btn btn-primary btn-block btn-sm', disabled: true %>
+				<%= link_to 'Delete Connection', connection_path(current_user.connections.where(provider: 'facebook').first), method: :delete %>
+			<% end %>
+    </div>
+	</div>
+
+	<!-- scheduled posts -->
+	<div class="col-md-5">
+		<h3 class="text-center">Scheduled</h3>
+    <hr>
+	</div>
+
+	<!-- post history	 -->
+	<div class="col-md-5">
+		<h3 class="text-center">History</h3>
+    <hr>
+	</div>
+</div>
